@@ -29,7 +29,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by 丁瑞 on 2017/2/2.
+ * Created by 其1.在getItemViewType设置每个返回的类型和条目位置(如果有标题的直接在xml中设置，不直接在外层通过position判断)
+ *              2.在创建视图
+ *              3.加载绑定数据  再去设置recycleview
  */
 public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
 
@@ -48,7 +50,6 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
     private int REFRESHPOSITION = 5;//下部head的位置
     private int CENTERPOSITION;//中间head的位置
     private int TYPE_REFRESH = 6;//最下面的布局
-    private int TYPE_FOOT;//最下面head的位置
 
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
@@ -207,7 +208,7 @@ public class HomepagerRecycleAdapter extends RecyclerView.Adapter {
         Log.e("getItemViewType", "getItemViewType: " + CENTERPOSITION + ",:" + REFRESHPOSITION);
 
         if (position == 0) return TYPE_TOP;//1
-        else if (position == CENTERPOSITION || position == REFRESHPOSITION||position ==TYPE_FOOT) return TYPE_HEADER;
+        else if (position == CENTERPOSITION || position == REFRESHPOSITION) return TYPE_HEADER;
         else if (position == 1) return TYPE_CATEGORY;
         else if (position == CENTERPOSITION + 1) return TYPE_CENTER;
         else return TYPE_REFRESH;
